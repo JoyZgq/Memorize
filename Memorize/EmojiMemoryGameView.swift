@@ -11,11 +11,11 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
      @ObservedObject var viewModel :EmojiMemoryGame
     
-    var body: some View {
+    var body: some View {ß
         VStack{
             Grid(viewModel.cards){
                 card in CardView(card: card).onTapGesture {
-                    withAnimation(.linear(duration:1)){
+                    withAnimation(.linear(duration:0.5)){
                         self.viewModel.choose(card: card)
                     }
                 }
@@ -47,7 +47,7 @@ struct CardView:View{
                 Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-card.bonusTimeRemaining*360-90),clockWise: true).padding(5).opacity(0.5)
                 Text(card.content).font(Font.system(size:fontSize(for: size)))
                     .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
-                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
+                    .animation(card.isMatched ? Animation.linear(duration: 0.5).repeatForever(autoreverses: false) : .default)
             }.cardify(isFaceUp: card.isFaceUp)
                 .transition(AnyTransition.scale)
                 
@@ -58,7 +58,7 @@ struct CardView:View{
 //    let fontScaleFactor:CGFloat=0.75
     
     private func fontSize(for size:CGSize) -> CGFloat {
-        min(size.width, size.height*0.7)
+        min(size.width, size.height*0.65)
     }
 }
 
